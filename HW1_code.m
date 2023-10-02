@@ -2,7 +2,10 @@
 ##### Carlos Gonzalez & Aldair Desiderio #####
 
 
+
 ##### Excercise 4 #####
+
+# Bifurcation diagram map x_n+1=r(cos*x_n)
 
 rvec = 1:0.01:4;  # Vector with r values
 
@@ -23,6 +26,7 @@ end
 xmat = xmat(101:end, :); # Delete first 100 rows of xmat
 
 # Plotting: for a given x value, plot all 400 iterates of x_n on top of each other
+# Commented out to not interfere with code below
 
 #figure;
 #hold on;
@@ -41,24 +45,29 @@ xmat = xmat(101:end, :); # Delete first 100 rows of xmat
 
 ##### Excercise 6 #####
 
+# Compute Lyapunov Exponent as a function of r for the sine map x_n+1=r(sinpix)
+# for 0<x_n<1 and o<r<1
 
 f = @(r, x) r * sin(pi*x);
 fprime = @(x, r) pi*r*cos(pi*x);
-iterations = 1000;
-rvec = 0:0.001:1;
 
-lyapunov_exp = zeros(size(rvec));
 
-for i = 1:length(rvec)
+iterations = 1000; # 1000 safe level, can adjust
+rvec = 0:0.001:1; #r vector
+
+lyapunov_exp = zeros(size(rvec)); # Creating empty vector for lyap_exp for
+                                  # Corresponding r value
+
+for i = 1:length(rvec) # Fist Forloop - Iterates thru rvec
     r = rvec(i);
     x = rand(1);
-    l_sum = 0;
+    l_sum = 0; # sum in lypunov exponent formula
 
     for j = 1:iterations
         x = f(r, x);
-        l_sum = l_sum + log(abs(fprime(x,r)));
+        l_sum = l_sum + log(abs(fprime(x,r))); # summation process
     end
-    lyapunov_exp(i) = l_sum / iterations;
+    lyapunov_exp(i) = l_sum / iterations; # 1/n term in formula
 end
 
 figure;
