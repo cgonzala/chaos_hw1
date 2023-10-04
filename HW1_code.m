@@ -15,7 +15,7 @@ legend('show');
 
 
 ##### Excercise 1-C ####
-x = 0.5; # initial condition
+x = 0.9; # initial condition
 iterations = 10000;
 x_values = zeros(1, iterations);
 
@@ -30,7 +30,7 @@ plot(1:iterations, x_values, '.');
 hold on
 
 
-x = -0.5; # initial condition
+x = -0.9; # initial condition
 x_values2 = zeros(1, iterations);
 
 # iterating thru sinx
@@ -49,36 +49,37 @@ hold off
 
 
 ##### Excercise 1-D ####
-x = 0.5; # initial condition
-iterations = 10000;
+x = 0.01; # initial condition
+iterations = 5000;
 x_values = zeros(1, iterations);
 
 # iterating thru sinx
 for i = 1:iterations
-    x = sin(x);
+    x = (x^3)+x;
     x_values(i) = x;
 end
 
 % Plot the iterates FOR POSITIVE xs
-plot(1:iterations, x_values, '.');
+plot(1:iterations, x_values, '.','DisplayName', 'X_0=0.01');
 hold on
 
-
-x = -0.5; # initial condition
+iterations = 5000;
+x = -0.01; # initial condition
 x_values2 = zeros(1, iterations);
 
 # iterating thru sinx
 for i = 1:iterations
-    x = sin(x);
+    x =  (x^3)+x;
     x_values2(i) = x;
 end
 
 % Plot the iterates FOR NEGATIVE xs
-plot(1:iterations, x_values2, '.');
+plot(1:iterations, x_values2, '.','DisplayName', 'X_0=-0.01');
 xlabel('Iteration');
-ylabel('sin(x)');
-title('Iterates of sin(x) around -1<x<1');
+ylabel('x^3+x');
+title('Iterates of x^3+x around 0');
 
+legend('show');
 hold off
 
 
