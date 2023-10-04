@@ -2,6 +2,88 @@
 ##### Carlos Gonzalez & Aldair Desiderio #####
 
 
+#### Excercise 1-B####
+xs = linspace((-pi/4), (pi/4),1000);
+tang =  abs(tan(xs));
+
+plot(abs(xs),tang-0, 'DisplayName', '|tanx-0|');
+hold on
+plot(abs(xs),abs(xs)-0, 'DisplayName', '|x-0|');
+
+hold off;
+legend('show');
+
+
+##### Excercise 1-C ####
+x = 0.5; # initial condition
+iterations = 10000;
+x_values = zeros(1, iterations);
+
+# iterating thru sinx
+for i = 1:iterations
+    x = sin(x);
+    x_values(i) = x;
+end
+
+% Plot the iterates FOR POSITIVE xs
+plot(1:iterations, x_values, '.');
+hold on
+
+
+x = -0.5; # initial condition
+x_values2 = zeros(1, iterations);
+
+# iterating thru sinx
+for i = 1:iterations
+    x = sin(x);
+    x_values2(i) = x;
+end
+
+% Plot the iterates FOR NEGATIVE xs
+plot(1:iterations, x_values2, '.');
+xlabel('Iteration');
+ylabel('sin(x)');
+title('Iterates of sin(x) around -1<x<1');
+
+hold off
+
+
+##### Excercise 1-D ####
+x = 0.5; # initial condition
+iterations = 10000;
+x_values = zeros(1, iterations);
+
+# iterating thru sinx
+for i = 1:iterations
+    x = sin(x);
+    x_values(i) = x;
+end
+
+% Plot the iterates FOR POSITIVE xs
+plot(1:iterations, x_values, '.');
+hold on
+
+
+x = -0.5; # initial condition
+x_values2 = zeros(1, iterations);
+
+# iterating thru sinx
+for i = 1:iterations
+    x = sin(x);
+    x_values2(i) = x;
+end
+
+% Plot the iterates FOR NEGATIVE xs
+plot(1:iterations, x_values2, '.');
+xlabel('Iteration');
+ylabel('sin(x)');
+title('Iterates of sin(x) around -1<x<1');
+
+hold off
+
+
+
+
 
 ##### Excercise 4 #####
 
