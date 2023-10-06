@@ -1,6 +1,7 @@
 ##### Homework 1 #####
 ##### Carlos Gonzalez & Aldair Desiderio #####
 
+###############################################################################
 
 #### Excercise 1-B####
 xs = linspace((-pi/4), (pi/4),1000);
@@ -49,56 +50,94 @@ hold off
 
 
 ##### Excercise 1-D ####
-x = 0.01; # initial condition
-iterations = 5000;
+x = 0.1; # initial condition
+iterations = 2506;
 x_values = zeros(1, iterations);
 
-# iterating thru sinx
+# iterating thru x^5+x
 for i = 1:iterations
-    x = (x^3)+x;
+    x = (x^5)+x;
     x_values(i) = x;
 end
 
 % Plot the iterates FOR POSITIVE xs
-plot(1:iterations, x_values, '.','DisplayName', 'X_0=0.01');
+plot(1:iterations, x_values, '.','DisplayName', 'X_0=0.1');
 hold on
 
-iterations = 5000;
-x = -0.01; # initial condition
+iterations = 2506;
+x = -0.1; # initial condition
 x_values2 = zeros(1, iterations);
 
-# iterating thru sinx
+# iterating thru x^5+x
 for i = 1:iterations
-    x =  (x^3)+x;
+    x =  (x^5)+x;
     x_values2(i) = x;
 end
 
 % Plot the iterates FOR NEGATIVE xs
-plot(1:iterations, x_values2, '.','DisplayName', 'X_0=-0.01');
+plot(1:iterations, x_values2, '.','DisplayName', 'X_0=-0.1');
 xlabel('Iteration');
-ylabel('x^3+x');
-title('Iterates of x^3+x around 0');
+ylabel('x^5+x');
+title('2506 iterates of x^5+x with x_0=0.1,-0.1');
 
 legend('show');
 hold off
 
 
 
+##########################################################################
+
+##### Excercise 2 ####
+x = 0.01; # initial condition
+iterations = 5003;
+x_values = zeros(1, iterations);
+
+# iterating thru x^5+x
+for i = 1:iterations
+    x = (x^3)+x;
+    x_values(i) = x;
+end
+
+% Plot the iterates FOR POSITIVE xs
+plot(1:iterations, x_values, '.','DisplayName', 'X_0=0.1');
+hold on
+
+iterations = 5003;
+x = -0.01; # initial condition
+x_values2 = zeros(1, iterations);
+
+# iterating thru x^5+x
+for i = 1:iterations
+    x =  (x^3)+x;
+    x_values2(i) = x;
+end
+
+% Plot the iterates FOR NEGATIVE xs
+plot(1:iterations, x_values2, '.','DisplayName', 'X_0=-0.1');
+xlabel('Iteration');
+ylabel('x^3+x');
+title('5003 iterates of x^3+x with x_0=0.01,-0.01');
+
+legend('show');
+hold off
+
+
+###############################################################################
 
 
 ##### Excercise 4 #####
 
 # Bifurcation diagram map x_n+1=r(cos*x_n)
 
-rvec = 1:0.01:4;  # Vector with r values
+rvec = 1:0.01:5;  # Vector with r values
 
-num_iterations = 500; #Can safely adjust
+num_iterations = 1000; #Can safely adjust
 
 xmat = zeros(num_iterations, length(rvec)); # matrix that will contain x_n itr.
 
 for i = 1:length(rvec) #iterating through the rvec using (i)
     r = rvec(i);
-    x = rand(1); # Choose a random x_0 between 0 and 1
+    x = 0.9; # Choose a random x_0 between 0 and 1
 
     for j = 1:num_iterations # iterating thru the rows of xmat using (j)
         x = r * cos(x);
@@ -108,21 +147,22 @@ end
 
 xmat = xmat(101:end, :); # Delete first 100 rows of xmat
 
-# Plotting: for a given x value, plot all 400 iterates of x_n on top of each other
-# Commented out to not interfere with code below
+ #Plotting: for a given x value, plot all 400 iterates of x_n on top of each other
 
-#figure;
-#hold on;
-#for t = 1:length(rvec)
-    #plot(rvec(t) * ones((num_iterations-100), 1), xmat(:, t),
-    #'.', 'MarkerSize', 2);
-    # You need this multiplication to create a column (num_iterations-100) tall
+figure;
+hold on;
+for t = 1:length(rvec)
+    plot(rvec(t) * ones((num_iterations-100), 1), xmat(:, t),
+    '.', 'MarkerSize', 2);
+     #You need this multiplication to create a column (num_iterations-100) tall
     # filled with rvec(t), so that you can stack xmat(:, t)
-#end
-#hold off;
+end
+hold off;
 
-#xlabel('r');
-#ylabel('x');
+xlabel('r');
+ylabel('x');
+title('Bifurcation Diagram: x_{n+1}=r(cos(x_n)), x_0=0.9');
+
 
 ###############################################################################
 
@@ -157,5 +197,42 @@ figure;
 plot(rvec, lyapunov_exp);
 xlabel('r');
 ylabel('Lyapunov Exponent');
+title('x_{n+1}=rsin(pi*x_n)');
+
+#############################################################################
+
+######### Excercise 7 ########
+
+f = @(x) mod(2*x, 1);
+iterations = 50;
+
+xvec = 0:0.5:iterations;
+ini1 = zeros(1, length(xvec));
+ini2 = zeros(1, length(xvec));
+d = zeros(1, length(xvec));
+
+ini1(1) = 0.1;
+ini2(1) = 0.1001;
+
+for i = 1:length(xvec)-1
+    ini1(i+1) = f(ini1(i));
+    ini2(i+1) = f(ini2(i));
+    d(i) = abs(ini1(i) - ini2(i));
+end
+
+figure;
+plot(xvec, ini1, '-', 'DisplayName', 'initial cond 1');
+hold on;
+plot(xvec, ini2, '-', 'DisplayName', 'initial cond 2');
+plot(xvec, d, '--', 'DisplayName', 'difference');
+legend('show');
+
+
+
+
+
+
+
+
 
 
