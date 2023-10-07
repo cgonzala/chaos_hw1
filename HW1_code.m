@@ -201,34 +201,6 @@ title('x_{n+1}=rsin(pi*x_n)');
 
 #############################################################################
 
-######### Excercise 7 ########
-
-f = @(x) mod(2*x, 1);
-iterations = 50;
-
-xvec = 0:0.5:iterations;
-ini1 = zeros(1, length(xvec));
-ini2 = zeros(1, length(xvec));
-d = zeros(1, length(xvec));
-
-ini1(1) = 0.1;
-ini2(1) = 0.1001;
-
-for i = 1:length(xvec)-1
-    ini1(i+1) = f(ini1(i));
-    ini2(i+1) = f(ini2(i));
-    d(i) = abs(ini1(i) - ini2(i));
-end
-
-figure;
-plot(xvec, ini1, '-', 'DisplayName', 'initial cond 1');
-hold on;
-plot(xvec, ini2, '-', 'DisplayName', 'initial cond 2');
-plot(xvec, d, '--', 'DisplayName', 'difference');
-legend('show');
-
-
-
 
 
 
